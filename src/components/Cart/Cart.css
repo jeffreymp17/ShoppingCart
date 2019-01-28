@@ -1,0 +1,19 @@
+.appBar {
+  position: relative;
+}
+.flex{
+  flex:  1;
+}
+.gridMargin{
+  padding-top:5%;
+}
+.titleTextSize{
+  font-size: 20px;
+  font-weight: bold;
+  margin:1%;
+}
+.total{
+  position:absolute;
+  padding-left: 80%;
+  text-align: right;
+}

@@ -1,0 +1,21 @@
+.root {
+   flexGrow: 1;
+ }
+ .paper {
+   padding: theme.spacing.unit * 2;
+   textAlign: 'center';
+   color: blue;
+ }
+.marginCard{
+   margin: 1%;
+ }
+ .productName{
+   font-size: 900;
+   font-weight: bold;
+ }
+.quantityChangeContainer{
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+ }

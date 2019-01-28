@@ -1,0 +1,15 @@
+
+.root {
+   flex-grow: 1;
+ }
+
+ .marginCard{
+   margin: 1%;
+ }
+ .ProductName{
+   font-size: 30px;
+   font-weight:bold;
+ }
+.QuantityChangeContainer{
+   align-content: center;
+ }
