@@ -13,3 +13,9 @@
 .QuantityChangeContainer{
    align-content: center;
  }
+.toast-font-color{
+color: white;
+}
+.buttonColor{
+background-color: #009688;
+}

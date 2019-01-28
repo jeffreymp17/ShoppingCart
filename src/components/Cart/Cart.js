@@ -14,37 +14,34 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
-import classes from './Cart.css';
+import './Cart.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import localStorage from 'local-storage';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class ShoppingCart extends Component {
+class Cart extends Component {
   state = {
    open: false,
    dense: false,
    products:[]
   };
-
-
-
-
   /**
- * Delete any porduct seleted in your cart
- * @param  {productId}
+ * Delete any product seleted in your cart
+ * @param  {number}
  */
   deleteProduct(productId){
     let aux=this.state.products;
     for(let i=0;i<aux.length;i++){
       if(aux[i].id===productId){
         aux.splice(i,1);
+        ToastStore.success('removed from the cart');
         break;
       }
     }
-    console.log(aux);
     this.setState({"products":aux});
     localStorage.set("selectedProducts",aux);
   }
@@ -68,32 +65,32 @@ class ShoppingCart extends Component {
   amountPerProduct=(product)=>{
     return product.price*product.quantity;
   }
-
+  //open modal and  set open state
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
+  //close modal and  set close state
   handleClose = () => {
     this.setState({ open: false });
   };
   //this method rendered all products selected previus
   renderSelectedProducts() {
-    this.state.products=localStorage.get("selectedProducts");
+  this.state.products=localStorage.get("selectedProducts");
   return this.state.products.map((product,index) =>{
     return <ListItem key={`selected-product-list${index}`}>
       <ListItemAvatar>
-      <Avatar height={50} width={50}>
-      <img src={product.image} alt="Vr"/>
+      <Avatar>
+      <img src={product.image} alt="Vr" className="productImage"/>
       </Avatar>
       </ListItemAvatar>
       <ListItemText
         secondary={
             <Fragment>
-              <Typography component="span" className={classes.inline} color="textPrimary">
+              <Typography component="span" className="inline" color="textPrimary">
               {`${product.name}`}
               </Typography>
                 {this.amountPerProduct(product)}
-                <Typography component="span" className={classes.inline} color="textPrimary">
+                <Typography component="span" className="inline" color="textPrimary">
                 {`No ${product.quantity}`}
                 </Typography>
             </Fragment>}
@@ -107,7 +104,6 @@ class ShoppingCart extends Component {
     </ListItem>
   })
 }
-
   render() {
     const { dense } = this.state;
     return (
@@ -127,12 +123,8 @@ class ShoppingCart extends Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" className="flex">
-              List of Products
+              Cart
               </Typography>
-              <Typography variant="h6" color="inherit" className={classes.flex}>
-                   {`Total:${this.finalAmount(this.state.products)}`}
-
-             </Typography>
             </Toolbar>
           </AppBar>
           <div className="gridMargin">
@@ -146,15 +138,15 @@ class ShoppingCart extends Component {
             </div>
           </Grid>
           <div className="total" >
-          <Typography component="span"  variant="h5"  color="textPrimary">
-          </Typography>
+          <Typography variant="h6" color="inherit" className="flex">
+               {`Total:${this.finalAmount(this.state.products)}`}
+         </Typography>
           </div>
           </div>
         </Dialog>
+        <ToastContainer position={ToastContainer.POSITION.RIGHT} store={ToastStore}></ToastContainer>
       </div>
     );
   }
 }
-
-
-export default ShoppingCart;
+export default Cart;
