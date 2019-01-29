@@ -18,6 +18,7 @@ import './Cart.css';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import localStorage from 'local-storage';
 import {ToastContainer, ToastStore} from 'react-toasts';
+import Button from '@material-ui/core/Button';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -73,9 +74,16 @@ class Cart extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  purchase=()=>{
+    localStorage.remove("selectedProducts");
+    this.setState({"products":[]});
+    ToastStore.success('Successful Purchase');
+
+
+  }
   //this method rendered all products selected previus
   renderSelectedProducts() {
-  this.state.products=localStorage.get("selectedProducts");
+  this.state.products=localStorage.get("selectedProducts")==null?[]:localStorage.get("selectedProducts");
   return this.state.products.map((product,index) =>{
     return <ListItem key={`selected-product-list${index}`}>
       <ListItemAvatar>
@@ -125,6 +133,7 @@ class Cart extends Component {
               <Typography variant="h6" color="inherit" className="flex">
               Cart
               </Typography>
+              <Button color="inherit" onClick={this.purchase}>Purchase</Button>
             </Toolbar>
           </AppBar>
           <div className="gridMargin">
