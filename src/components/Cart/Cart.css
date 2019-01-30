@@ -13,11 +13,18 @@
   margin:1%;
 }
 .total{
-  position:absolute;
+  position:fixed;
   padding-left: 80%;
+
   text-align: right;
 }
 .productImage{
   height: 100%;
   width: 100%;
+}
+.listPaddingTop{
+  padding-top: 5%;
+}
+.trashColor{
+  color: #b71c1c;
 }

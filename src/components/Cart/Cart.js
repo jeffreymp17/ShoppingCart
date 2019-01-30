@@ -19,17 +19,26 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import localStorage from 'local-storage';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
-
+const styles = {
+  appBar: {
+    position: 'relative',
+  },
+  flex: {
+    flex: 1,
+  },
+};
 class Cart extends Component {
   state = {
    open: false,
    dense: false,
    products:[]
   };
+
   /**
  * Delete any product seleted in your cart
  * @param  {number}
@@ -39,7 +48,7 @@ class Cart extends Component {
     for(let i=0;i<aux.length;i++){
       if(aux[i].id===productId){
         aux.splice(i,1);
-        ToastStore.success('removed from the cart');
+        ToastStore.success(`removed from the cart`);
         break;
       }
     }
@@ -75,9 +84,14 @@ class Cart extends Component {
     this.setState({ open: false });
   };
   purchase=()=>{
+    console.log(this.state.products);
+    if(this.state.products.length==0||this.state.products==[]){
+      ToastStore.error('Empty Cart');
+    }else{
     localStorage.remove("selectedProducts");
     this.setState({"products":[]});
     ToastStore.success('Successful Purchase');
+  }
 
 
   }
@@ -99,13 +113,13 @@ class Cart extends Component {
               </Typography>
                 {this.amountPerProduct(product)}
                 <Typography component="span" className="inline" color="textPrimary">
-                {`No ${product.quantity}`}
+                {`Items ${product.quantity}`}
                 </Typography>
             </Fragment>}
       />
       <ListItemSecondaryAction>
-        <IconButton aria-label="Delete" onClick={(e)=>this.deleteProduct(product.id)}>
-          <DeleteIcon />
+        <IconButton  aria-label="Delete" onClick={(e)=>this.deleteProduct(product.id)}>
+          <DeleteIcon className="trashColor"/>
         </IconButton>
       </ListItemSecondaryAction>
 
@@ -158,4 +172,4 @@ class Cart extends Component {
     );
   }
 }
-export default Cart;
+export default  withStyles(styles)(Cart);

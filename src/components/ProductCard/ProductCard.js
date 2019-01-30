@@ -68,10 +68,10 @@
       const {product}=this.props
       return(
         <Grid item xs={12} sm={4} lg={4} xl={3} className="marginCard" >
-         <Card >
+         <Card>
            <CardActionArea>
              <CardMedia
-             src={product.image}
+             image=""
            title={product.name}>
           <img src={product.image}  alt="cv" width={250} height={230} />
         </CardMedia>

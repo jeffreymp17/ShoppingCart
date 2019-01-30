@@ -2,6 +2,7 @@
   "name": "shopping-cart",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://jf2028mp.github.io/ShoppingCart/",
   "dependencies": {
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
@@ -13,6 +14,8 @@
     "react-toasts": "^2.0.14"
   },
   "scripts": {
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
